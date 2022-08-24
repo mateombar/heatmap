@@ -1,6 +1,7 @@
-async function draw(el) {
+async function draw(el, scale) {
   // Data
   const dataset = await d3.json('data.json');
+  dataset.sort((a, b) => a - b);
 
   // Dimensions
   let dimensions = {
@@ -16,11 +17,19 @@ async function draw(el) {
     .attr("width", dimensions.width)
     .attr("height", dimensions.height);
 
+  // Scales
+  let colorScale;
+
+  if (scale === 'linear') {
+    colorScale = d3.scaleLinear()
+      .domain(d3.extent(dataset))
+      .range(['white', 'red'])
+  }
+
   // Rectangles
   svg.append('g')
     .attr('transform', 'translate(2,2)')
     .attr('stroke', 'black ')
-    .attr('fill', '#ddd')
     .selectAll('rect')
     .data(dataset)
     .join('rect')
@@ -28,7 +37,8 @@ async function draw(el) {
     .attr('height', box - 3)
     .attr('x', (d, idx) => box * (idx % 20)) //0, 30, 60
     .attr('y', (d, idx) => box * ((idx / 20) | 0))
+    .attr('fill', colorScale)
 
 }
 
-draw('#heatmap1')
+draw('#heatmap1', 'linear')
