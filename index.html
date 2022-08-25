@@ -6,23 +6,116 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>D3 Heatmap</title>
   <link rel="stylesheet" type="text/css" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+    integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-  <h1>Linear Scale</h1>
-  <div class="chart" id="heatmap1"></div>
+  <div class="container-fluid max-w-768px">
+    <h2 class="pt-3">Working with scales</h2>
+    <h5>With the same data each chart is telling us a different story</h5>
+    <ul>
+      <li class="mb-1">Those who earn up to $45.200 dollars a year are lower class.</li>
+      <li class="mb-1">Those who earn between $45.200 and $135.600 dollars a year are middle class.</li>
+      <li class="mb-1">Those who earn more than $135.600 dollars a year are upper class.</li>
+      <li class="mb-1">Maximum income: $300.577</li>
+    </ul>
 
-  <h1>Quantize Scale</h1>
-  <div class="chart" id="heatmap2"></div>
-  
-  <h1>Quantile Scale</h1>
-  <div class="chart" id="heatmap3"></div>
+    <div class="card mt-4 shadow-sm">
+      <div class="card-header">
+        <h3 class="m-0">Linear Scale</h3>
+      </div>
+      <div class="card-body">
+        <div class="d-flex flex-column justify-content-center">
+          <p class="max-w-600px">It works by mapping the range of the input domain to a range of colors in
+            the
+            output range.</p>
+        </div>
+        <div class="overflow-auto">
+          <div class="chart" id="heatmap1"></div>
+        </div>
+      </div>
+    </div>
 
-  <h1>Threshold Scale</h1>
-  <div class="chart" id="heatmap4"></div>
+    <div class="card mt-4 shadow-sm">
+      <div class="card-header">
+        <h3 class="m-0">Quantize Scale</h3>
+      </div>
 
+      <div class="card-body">
+        <div class="d-flex flex-column justify-content-center">
+          <p class="blockquote">There are more individuals earning at most $100.192.</p>
+          <p class="max-w-600px text-secondary fnt-15">It works by dividing the range of the input domain by the number
+            of buckets
+            in
+            the output range.</p>
+          <ul>
+            <li><i class="fa-solid fa-circle color-low me-2"></i>min $0 - max $100.192</li>
+            <li><i class="fa-solid fa-circle color-mid me-2"></i>min $100.192 - max $200.385</li>
+            <li><i class="fa-solid fa-circle color-high me-2"></i>min $200.385 - max $300.577</li>
+          </ul>
+        </div>
+        <div class="overflow-auto">
+          <div class="chart" id="heatmap2"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-4 shadow-sm">
+      <div class="card-header">
+        <h3 class="m-0">Quantile Scale</h3>
+      </div>
+
+      <div class="card-body">
+        <div class="d-flex flex-column justify-content-center">
+          <p class="blockquote">There is an even amount of individuals in each class.</p>
+          <p class="max-w-600px text-secondary fnt-15">
+            It works by dividing the number of items of the input domain by the number of buckets in the output range.
+          </p>
+          <ul>
+            <li><i class="fa-solid fa-circle color-low me-2"></i>Lowest: 33</li>
+            <li><i class="fa-solid fa-circle color-mid me-2"></i>Middle: 33</li>
+            <li><i class="fa-solid fa-circle color-high me-2"></i>Highest: 34</li>
+          </ul>
+        </div>
+        <div class="overflow-auto">
+          <div class="chart" id="heatmap3"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card my-4 shadow-sm">
+      <div class="card-header">
+        <h3 class="m-0">Threshold Scale</h3>
+      </div>
+      <div class="card-body">
+        <div class="d-flex flex-column justify-content-center">
+          <p class="blockquote m-0">This scale tells us that there is a massive disparity between social classes.</p>
+          <p>There are more individuals in the lower class than the middle and upper classes combined.</p>
+          <p class="max-w-600px text-secondary fnt-15">
+            It works by dividing the number of items of the input domain by the thresholds in the output range.
+          </p>
+          <ul>
+            <li><i class="fa-solid fa-circle color-low me-2"></i>min $0 - max $45.200</li>
+            <li><i class="fa-solid fa-circle color-mid me-2"></i>min $45.200 - max $135.600</li>
+            <li><i class="fa-solid fa-circle color-high me-2"></i>min $135.600 - max $300.577</li>
+          </ul>
+        </div>
+        <div class="overflow-auto">
+          <div class="chart" id="heatmap4"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.6.1/d3.js"></script>
   <script src="app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

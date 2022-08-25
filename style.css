@@ -10,5 +10,32 @@ h1:not(:first-child) {
   width: 600px;
   height: 150px;
   background-color: #f7f7f7;
-  margin: 25px auto;
+}
+
+.max-w-600px{
+  max-width: 600px;
+}
+
+.max-w-768px{
+  max-width: 768px;
+}
+
+.fnt-15{
+  font-size: 15px;
+}
+
+ul{
+  list-style: none;
+}
+
+.color-low{
+  color: #d0e4ff;
+}
+
+.color-mid{
+  color: #7dace9;
+}
+
+.color-high{
+  color: #3682e6;
 }
