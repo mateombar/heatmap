@@ -23,7 +23,11 @@ async function draw(el, scale) {
   if (scale === 'linear') {
     colorScale = d3.scaleLinear()
       .domain(d3.extent(dataset))
-      .range(['white', 'red'])
+      .range(['#FFF2F2', '#F47C7C'])
+  } else if (scale === 'quantize') {
+    colorScale = d3.scaleQuantize()
+      .domain(d3.extent(dataset))
+      .range(['#FFF2F2', '#EF9F9F', '#F47C7C'])
   }
 
   // Rectangles
@@ -41,4 +45,5 @@ async function draw(el, scale) {
 
 }
 
-draw('#heatmap1', 'linear')
+draw('#heatmap1', 'linear');
+draw('#heatmap2', 'quantize');
