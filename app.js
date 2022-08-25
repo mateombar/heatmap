@@ -20,14 +20,27 @@ async function draw(el, scale) {
   // Scales
   let colorScale;
 
-  if (scale === 'linear') {
-    colorScale = d3.scaleLinear()
-      .domain(d3.extent(dataset))
-      .range(['#FFF2F2', '#F47C7C'])
-  } else if (scale === 'quantize') {
-    colorScale = d3.scaleQuantize()
-      .domain(d3.extent(dataset))
-      .range(['#FFF2F2', '#EF9F9F', '#F47C7C'])
+  switch (scale) {
+    case 'quantize':
+      colorScale = d3.scaleQuantize()
+        .domain(d3.extent(dataset))
+        .range(['#FFF2F2', '#EF9F9F', '#F47C7C'])
+      break;
+    case 'quantile':
+      colorScale = d3.scaleQuantile()
+        .domain(dataset)
+        .range(['#FFF2F2', '#EF9F9F', '#F47C7C'])
+      break;
+    case 'threshold':
+      colorScale = d3.scaleThreshold()
+        .domain([45200, 135600])
+        .range(['#FFF2F2', '#EF9F9F', '#F47C7C'])
+      break;
+    case 'linear':
+    default:
+      colorScale = d3.scaleLinear()
+        .domain(d3.extent(dataset))
+        .range(['#FFF2F2', '#F47C7C'])
   }
 
   // Rectangles
@@ -47,3 +60,5 @@ async function draw(el, scale) {
 
 draw('#heatmap1', 'linear');
 draw('#heatmap2', 'quantize');
+draw('#heatmap3', 'quantile');
+draw('#heatmap4', 'threshold');
